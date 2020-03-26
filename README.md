@@ -1,4 +1,4 @@
-# petproject
+# petproject 4Fun
 
 ## Project setup
 ```
