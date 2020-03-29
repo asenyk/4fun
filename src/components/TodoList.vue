@@ -1,11 +1,13 @@
 <template>
   <div>
-    <div v-for="todo in todos" :key="todo.id">
+    <input type="text" v-model="todoText"/>
+    <button @click="addItem">Add item</button>
+    <div v-for="(todo, index) in todos" :key="todo.id">
       <span :class="{ 'done':todo.completed }"
-          @click="() => todo.completed = !todo.completed">
+            @click="markCompleted(todo)">
         {{ todo.text }}
       </span>
-      <button>X</button>
+      <button @click="deleteItem(index)">X</button>
     </div>
   </div>
 </template>
@@ -14,23 +16,28 @@
 export default {
   data () {
     return {
-      todos: [
-        {
-          id: 1,
-          text: 'one',
-          completed: false
-        },
-        {
-          id: 2,
-          text: 'two',
-          completed: true
-        },
-        {
-          id: 3,
-          text: 'three',
+      todoText: '',
+      todos: []
+    }
+  },
+  methods: {
+    addItem () {
+      if (this.todoText !== '') {
+        const createId = () => parseInt(Math.random() * 10000000000000)
+        const obj = {
+          id: createId(),
+          text: this.todoText,
           completed: false
         }
-      ]
+        this.todos.push(obj)
+        this.todoText = ''
+      }
+    },
+    markCompleted (todo) {
+      todo.completed = !todo.completed
+    },
+    deleteItem (index) {
+      this.todos.splice(index, 1)
     }
   }
 }
