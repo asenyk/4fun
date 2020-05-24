@@ -10,8 +10,6 @@
       <button @click="deleteItem(index)">X</button>
     </div>
     <hr>
-    <button @click="testWriteFirestore()">Write Firestore</button>
-    <hr>
     <hr>
     <hr>
     Title <input type="text" v-model="title"/>
@@ -27,7 +25,6 @@
 
 <script>
 import axios from 'axios'
-import { db } from '../firebase'
 
 export default {
   data () {
@@ -55,19 +52,6 @@ export default {
         .then(response => {
           console.log(response)
           this.dataServ = response.data
-        })
-    },
-    testWriteFirestore () {
-      db.collection('users').add({
-        testField1: 'Qwe',
-        testField2: 'Qwerty',
-        testField3: 12
-      })
-        .then(function (docRef) {
-          console.log('Document written with ID: ', docRef.id)
-        })
-        .catch(function (error) {
-          console.error('Error adding document: ', error)
         })
     },
     addItem () {
