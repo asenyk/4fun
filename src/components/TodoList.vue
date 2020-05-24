@@ -9,10 +9,14 @@
       </span>
       <button @click="deleteItem(index)">X</button>
     </div>
+    <hr>
+    <button @click="testWriteFirestore()">Write Firestore</button>
   </div>
 </template>
 
 <script>
+import { db } from '../firebase'
+
 export default {
   data () {
     return {
@@ -21,6 +25,19 @@ export default {
     }
   },
   methods: {
+    testWriteFirestore () {
+      db.collection('users').add({
+        testField1: 'Qwe',
+        testField2: 'Qwerty',
+        testField3: 12
+      })
+        .then(function (docRef) {
+          console.log('Document written with ID: ', docRef.id)
+        })
+        .catch(function (error) {
+          console.error('Error adding document: ', error)
+        })
+    },
     addItem () {
       if (this.todoText !== '') {
         const createId = () => parseInt(Math.random() * 10000000000000)
