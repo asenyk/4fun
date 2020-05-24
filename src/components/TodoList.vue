@@ -11,20 +11,52 @@
     </div>
     <hr>
     <button @click="testWriteFirestore()">Write Firestore</button>
+    <hr>
+    <hr>
+    <hr>
+    Title <input type="text" v-model="title"/>
+    Description <input type="text" v-model="description"/>
+    <hr>
+    <button @click="addData()">Add data</button>
+    <hr>
+    <button @click="getData()">Get data</button>
+    <hr>
+    {{ dataServ }}
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import { db } from '../firebase'
 
 export default {
   data () {
     return {
       todoText: '',
-      todos: []
+      todos: [],
+      title: '',
+      description: '',
+      dataServ: []
     }
   },
   methods: {
+    addData () {
+      const data = {
+        title: this.title,
+        description: this.description
+      }
+      axios.post('tutorials', data)
+        .then(response => {
+          console.log(response)
+        })
+    },
+    getData () {
+      axios.get('tutorials')
+        .then(response => {
+          console.log(response)
+          this.dataServ = response.data
+        })
+    },
     testWriteFirestore () {
       db.collection('users').add({
         testField1: 'Qwe',
