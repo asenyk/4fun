@@ -1,5 +1,5 @@
 <template>
-  <div class="vue-tempalte user-form">
+  <div class="vue-template user-form">
     <form>
       <h3>Sign Up</h3>
 
@@ -40,7 +40,7 @@
 
 <script>
 export default {
-  name: 'Singup',
+  name: 'Signup',
   data () {
     return {}
   }

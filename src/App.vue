@@ -1,5 +1,5 @@
 <template>
-  <div class="vue-tempalte">
+  <div class="vue-template">
     <!-- Navigation -->
     <nav class="navbar shadow bg-white rounded justify-content-between flex-nowrap flex-row fixed-top">
       <div class="container">
@@ -11,7 +11,7 @@
             <router-link class="nav-link pr-3" to="/login">Sign in</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="btn btn-outline-primary" to="/singup">Sign up</router-link>
+            <router-link class="btn btn-outline-primary" to="/signup">Sign up</router-link>
           </li>
         </ul>
       </div>

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import TodoList from '../components/TodoList.vue'
 import Login from '../components/Login.vue'
-import Singup from '../components/Signup.vue'
+import Signup from '../components/Signup.vue'
 import ForgotPassword from '../components/ForgotPassword.vue'
 
 Vue.use(VueRouter)
@@ -19,9 +19,9 @@ const routes = [
     component: Login
   },
   {
-    path: '/singup',
-    name: 'Singup',
-    component: Singup
+    path: '/signup',
+    name: 'Signup',
+    component: Signup
   },
   {
     path: '/forgot-password',
