@@ -15,17 +15,17 @@
 
       <div class="form-group">
         <label>Email address</label>
-        <input type="email" @input="emailadress($event.target.value)" class="form-control form-control-lg" />
+        <input type="email" @input="emailadress($event.target.value)" class="form-control form-control-lg"/>
       </div>
 
       <div class="form-group">
         <label>Phone Number</label>
-        <input type="email" @input="phonenumber($event.target.value)" class="form-control form-control-lg" />
+        <input type="email" @input="phonenumber($event.target.value)" class="form-control form-control-lg"/>
       </div>
 
       <div class="form-group">
         <label>Password</label>
-        <input type="password" @input="pass($event.target.value)" class="form-control form-control-lg" />
+        <input type="password" @input="pass($event.target.value)" class="form-control form-control-lg"/>
       </div>
 
       <button type="button" class="btn btn-dark btn-lg btn-block" v-on:click="logo">Edit</button>
