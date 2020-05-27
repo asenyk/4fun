@@ -30,7 +30,7 @@ const routes = [
     component: ForgotPassword
   },
   {
-    path: '/edit-profile-page',
+    path: '/edit profile',
     name: 'EditProfilePage',
     component: EditProfilePage
   }
