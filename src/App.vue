@@ -12,6 +12,7 @@
           </li>
           <li class="nav-item">
             <router-link class="btn btn-outline-primary" to="/signup">Sign up</router-link>
+            <router-link class="btn btn-outline-primary" to="/edit-profile-page">EDIT</router-link>
           </li>
         </ul>
       </div>
