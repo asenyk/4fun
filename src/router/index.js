@@ -4,6 +4,7 @@ import TodoList from '../components/TodoList.vue'
 import Login from '../components/Login.vue'
 import Signup from '../components/Signup.vue'
 import ForgotPassword from '../components/ForgotPassword.vue'
+import EditProfile from '../components/EditProfile'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
     path: '/forgot-password',
     name: 'ForgotPassword',
     component: ForgotPassword
+  },
+  {
+    path: '/edit-profile',
+    name: 'EditProfile',
+    component: EditProfile
   }
 ]
 
