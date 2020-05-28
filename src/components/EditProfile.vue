@@ -1,7 +1,7 @@
 <template>
   <div class="vue-template user-form">
     <form>
-      <h3>Edit User Profile</h3>
+      <h3>Edit User</h3>
 
       <div class="form-group">
         <label>First Name</label>
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     save: function () {
-      console.log(this.profile)
+      console.log(this.user)
     }
   }
 }
