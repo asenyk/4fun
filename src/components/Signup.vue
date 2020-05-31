@@ -61,7 +61,6 @@ export default {
         phoneNumber: this.phoneNumber,
         password: this.password
       }
-      console.log(data)
       axios.post('users', data)
         .then(response => {
           console.log(response)
