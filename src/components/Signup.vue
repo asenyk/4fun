@@ -63,7 +63,8 @@ export default {
       }
       axios.post('users', data)
         .then(response => {
-          console.log(response)
+          this.$store.state.user = response.data
+          this.$router.push({ name: 'EditProfile' })
         })
     }
   }
