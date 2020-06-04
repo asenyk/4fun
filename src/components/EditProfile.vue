@@ -15,7 +15,7 @@
 
       <div class="form-group">
         <label>Email address</label>
-        <input type="email" v-model="user.email" class="form-control form-control-lg"/>
+        <input type="email" v-model="user.emailAddress" class="form-control form-control-lg"/>
       </div>
 
       <div class="form-group">
@@ -42,7 +42,7 @@ export default {
       user: {
         firstName: '',
         lastName: '',
-        email: '',
+        emailAddress: '',
         phone: '',
         password: ''
       }
@@ -52,6 +52,9 @@ export default {
     save: function () {
       console.log(this.user)
     }
+  },
+  mounted () {
+    this.user = this.$store.state.user
   }
 }
 </script>
