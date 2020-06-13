@@ -10,7 +10,7 @@
 
       <div class="form-group">
         <label>Last Name</label>
-        <input type="text" v-model="user.lastName" class="form-control form-control-lg"/>
+        <input type="tel" v-model="user.lastName" class="form-control form-control-lg"/>
       </div>
 
       <div class="form-group">

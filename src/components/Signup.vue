@@ -5,7 +5,7 @@
 
       <div class="form-group">
         <label>First Name</label>
-        <input  type="text" class="form-control focused form-control-lg" v-model="firstName"/>
+        <input type="text" class="form-control form-control-lg" v-model="firstName"/>
       </div>
 
       <div class="form-group">
@@ -20,7 +20,7 @@
 
       <div class="form-group">
         <label>Phone Number</label>
-        <input type="text" class="form-control form-control-lg" v-model="phoneNumber"/>
+        <input type="tel" class="form-control form-control-lg" v-model="phoneNumber"/>
       </div>
 
       <div class="form-group">
@@ -67,12 +67,5 @@ export default {
         })
     }
   }
-
 }
-
 </script>
-<style scoped>
-  .form-control:focus {
-    border-color: #212529  !important;
-  }
-</style>
