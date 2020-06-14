@@ -20,7 +20,7 @@
 
       <div class="form-group">
         <label>Phone Number</label>
-        <input type="email" class="form-control form-control-lg" v-model="phoneNumber"/>
+        <input type="tel" pattern='01[0-9]{9}' class="form-control form-control-lg" v-model="phoneNumber"/>
       </div>
 
       <div class="form-group">
