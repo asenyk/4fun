@@ -20,7 +20,7 @@
 
       <div class="form-group">
         <label>Phone Number</label>
-        <input type="tel" pattern='01[0-9]{9}' class="form-control form-control-lg" v-model="phoneNumber"/>
+        <input type="tel" class="form-control form-control-lg" v-model="phoneNumber"/>
       </div>
 
       <div class="form-group">
@@ -63,7 +63,8 @@ export default {
       }
       axios.post('users', data)
         .then(response => {
-          console.log(response)
+          this.$store.state.user = response.data
+          this.$router.push({ name: 'EditProfile' })
         })
     }
   }

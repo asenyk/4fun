@@ -40,8 +40,8 @@ export default {
         password: this.password
       }
       axios.post('users/login', data)
-        .then(responce => {
-          this.$store.state.user = responce.data
+        .then(response => {
+          this.$store.state.user = response.data
           this.$router.push({ name: 'EditProfile' })
         })
     }
