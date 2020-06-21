@@ -5,8 +5,10 @@ import Login from '../components/Login.vue'
 import Signup from '../components/Signup.vue'
 import ForgotPassword from '../components/ForgotPassword.vue'
 import EditProfile from '../components/EditProfile'
+import Vuelidate from 'vuelidate'
 
 Vue.use(VueRouter)
+Vue.use(Vuelidate)
 
 const routes = [
   {
