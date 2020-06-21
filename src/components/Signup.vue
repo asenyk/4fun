@@ -1,6 +1,7 @@
 <template>
   <div class="vue-template user-form">
-    <form @submit.prevent="handleSubmit">
+    <form>
+      <!--      @submit.prevent="handleSubmit"-->
       <h3>Sign Up</h3>
 
       <div class="form-group">
@@ -15,14 +16,22 @@
 
       <div class="form-group">
         <label>Email address</label>
+
         <input
           type="email"
           class="form-control form-control-lg" :class="{ 'is-invalid': submitted && $v.user.emailAddress.$error }"
-          v-model="user.emailAddress"/>
-        <div v-if="submitted && $v.user.emailAddress.$error" class="invalid-feedback">
-          <span v-if="!$v.user.emailAddress.required">Email is required</span>
-          <span v-if="!$v.user.emailAddress.email">Email is invalid</span>
-        </div>
+          v-model="user.emailAddress"
+          @blur="$v.user.emailAddress.$touch()"
+        />
+
+<!--        error - {{ $v.user.emailAddress.$error }}-->
+<!--        <p>required - {{ $v.user.emailAddress.required }}</p>-->
+<!--        <p>email &#45;&#45;{{ $v.user.emailAddress.email }}</p>-->
+
+      </div>
+      <div v-if="$v.user.emailAddress.$error" class="errorEmail">
+        <span v-if="!$v.user.emailAddress.required || $v.$touch()">Email is required</span>
+        <span v-else>Email is invalid</span>
       </div>
 
       <div class="form-group">
@@ -35,7 +44,7 @@
         <input type="password" class="form-control form-control-lg" v-model="user.password"/>
       </div>
 
-      <button type="button" class="btn btn-dark btn-lg btn-block" @click="addData()">Sign Up</button>
+      <button type="button" :disabled="$v.invalid" class="btn btn-dark btn-lg btn-block" @click="addData()">Sign Up</button>
 
       <p class="forgot-password text-right">
         Already registered
@@ -70,15 +79,15 @@ export default {
 
   },
   methods: {
-    handleSubmit (e) {
-      this.submitted = true
-
-      this.$v.$touch()
-      if (this.$v.$invalid) {
-        return
-      }
-      console.log(this.user.firstName)
-    },
+    // handleSubmit (e) {
+    //   this.submitted = true;
+    //
+    //   this.$v.$touch();
+    //   if (this.$v.$invalid) {
+    //     return
+    //   }
+    //   console.log(this.user.firstName)
+    // },
     addData () {
       const data = {
         firstName: this.user.firstName,
