@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -29,13 +30,13 @@ export default new Vuex.Store({
     login ({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        this.$http.post('users/login', user)
+        axios.post('users/login', user)
           .then(resp => {
             const token = resp.data.token
             const user = resp.data.user
             localStorage.setItem('token', token)
             // Add the following line:
-            this.$http.defaults.headers.common.Authorization = token
+            axios.defaults.headers.common.Authorization = token
             commit('auth_success', token, user)
             resolve(resp)
           })
@@ -49,13 +50,13 @@ export default new Vuex.Store({
     register ({ commit }, user) {
       return new Promise((resolve, reject) => {
         commit('auth_request')
-        this.$http.post('users', user)
+        axios.post('users', user)
           .then(resp => {
             const token = resp.data.token
             const user = resp.data.user
             localStorage.setItem('token', token)
             // Add the following line:
-            this.$http.defaults.headers.common.Authorization = token
+            axios.defaults.headers.common.Authorization = token
             commit('auth_success', token, user)
             resolve(resp)
           })
@@ -70,7 +71,7 @@ export default new Vuex.Store({
       return new Promise((resolve, reject) => {
         commit('logout')
         localStorage.removeItem('token')
-        delete this.$http.defaults.headers.common.Authorization
+        delete axios.defaults.headers.common.Authorization
         resolve()
       })
     }
