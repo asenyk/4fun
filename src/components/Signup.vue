@@ -39,8 +39,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'Signup',
   data () {
@@ -61,11 +59,10 @@ export default {
         phoneNumber: this.phoneNumber,
         password: this.password
       }
-      axios.post('users', data)
-        .then(response => {
-          this.$store.state.user = response.data
-          this.$router.push({ name: 'EditProfile' })
-        })
+      this.$store
+        .dispatch('register', data)
+        .then(() => this.$router.push({ name: 'EditProfile' }))
+        .catch(err => console.log(err))
     }
   }
 }

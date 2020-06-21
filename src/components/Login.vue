@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'Login',
   data () {
@@ -39,11 +38,10 @@ export default {
         emailAddress: this.emailAddress,
         password: this.password
       }
-      axios.post('users/login', data)
-        .then(response => {
-          this.$store.state.user = response.data
-          this.$router.push({ name: 'EditProfile' })
-        })
+      this.$store
+        .dispatch('login', data)
+        .then(() => this.$router.push({ name: 'EditProfile' }))
+        .catch(err => console.log(err))
     }
   }
 }
