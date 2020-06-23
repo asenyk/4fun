@@ -8,11 +8,12 @@
         </router-link>
         <ul class="nav navbar-nav flex-row float-right">
           <li class="nav-item">
-            <router-link class="nav-link pr-3" to="/login">Sign in</router-link>
+            <router-link v-if="isLoggedIn" class="nav-link pr-3" to="/login">Sign out</router-link>
+            <router-link v-else class="nav-link pr-3" to="/login">Sign in</router-link>
           </li>
           <li class="nav-item">
-            <router-link class="btn btn-outline-primary" to="/signup">Sign up</router-link>
-            <router-link class="btn btn-outline-primary" to="/edit-profile">Edit profile</router-link>
+            <router-link v-if="isLoggedIn" class="btn btn-outline-primary" to="/edit-profile">Edit profile</router-link>
+            <router-link v-else class="btn btn-outline-primary" to="/signup">Sign up</router-link>
           </li>
         </ul>
       </div>
@@ -28,3 +29,20 @@
     </div>
   </div>
 </template>
+
+<script>
+export default {
+  computed: {
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn
+    }
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch('logout').then(() => {
+        this.$router.push('/login')
+      })
+    }
+  }
+}
+</script>
