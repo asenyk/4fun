@@ -1,22 +1,30 @@
 <template>
   <div class="vue-template user-form">
     <form>
-      <!--      @submit.prevent="handleSubmit"-->
       <h3>Sign Up</h3>
 
       <div class="form-group">
         <label>First Name</label>
-        <input type="text" class="form-control form-control-lg" v-model="user.firstName"/>
+        <input type="text"
+               class="form-control form-control-lg" :class="{ 'is-invalid': submitted && $v.user.firstName.$error }"
+               v-model="user.firstName"
+               @blur="$v.user.firstName.$touch()"
+        />
       </div>
+      <div v-if="$v.user.firstName.$error" class="error"> First Name is required</div>
 
       <div class="form-group">
         <label>Last Name</label>
-        <input type="text" class="form-control form-control-lg" v-model="user.lastName"/>
+        <input type="text"
+               class="form-control form-control-lg" :class="{ 'is-invalid': submitted && $v.user.lastName.$error }"
+               v-model="user.lastName"
+               @blur="$v.user.lastName.$touch()"
+        />
       </div>
+      <div v-if="$v.user.lastName.$error" class="error"> Last Name is required</div>
 
       <div class="form-group">
         <label>Email address</label>
-
         <input
           type="email"
           class="form-control form-control-lg" :class="{ 'is-invalid': submitted && $v.user.emailAddress.$error }"
@@ -40,18 +48,32 @@
       <div v-if="$v.user.phoneNumber.$error" class="error">
         <span v-if="!$v.user.phoneNumber.required || $v.$touch()"> phone is required</span>
         <span v-if="!$v.user.phoneNumber.numeric"> Its not a number</span>
-        <span v-if="!$v.user.phoneNumber.maxLength || !$v.user.phoneNumber.minLength"> Number must have 10 numbers  </span>
+        <span
+          v-if="!$v.user.phoneNumber.maxLength || !$v.user.phoneNumber.minLength"> Number must have 10 numbers  </span>
         <span v-else>phone is invalid</span>
       </div>
 
       <div class="form-group">
         <label>Password</label>
-        <input type="password" class="form-control form-control-lg" v-model="user.password"/>
+        <input type="password"
+               class="form-control form-control-lg" :class="{ 'is-invalid': submitted && $v.user.password.$error }"
+               v-model="user.password"/>
+      </div>
+      <div v-if="$v.user.password.$error" class="error">
+        <span v-if="!$v.user.password.required || $v.$touch()">Password is required</span>
+        <span v-if="!$v.user.password.minLength">Password must be at least 6 characters</span>
       </div>
 
       <div class="form-group">
         <label>Confirm Password</label>
-        <input type="password" class="form-control form-control-lg" v-model="user.confirmPassword"/>
+        <input type="password"
+               class="form-control form-control-lg"
+               :class="{ 'is-invalid': submitted && $v.user.confirmPassword.$error }"
+               v-model="user.confirmPassword"/>
+      </div>
+      <div v-if="$v.user.confirmPassword.$error" class="error">
+        <span v-if="!$v.user.confirmPassword.required">Confirm Password is required</span>
+        <span v-else-if="!$v.user.confirmPassword.sameAsPassword">Passwords must match</span>
       </div>
 
       <button type="button" :disabled="$v.$invalid"
@@ -89,6 +111,8 @@ export default {
   },
   validations: {
     user: {
+      firstName: { required },
+      lastName: { required },
       emailAddress: { required, email },
       phoneNumber: { required, numeric, maxLength: maxLength(10), minLength: minLength(10) },
       password: { required, minLength: minLength(6) },
@@ -97,15 +121,6 @@ export default {
 
   },
   methods: {
-    // handleSubmit (e) {
-    //   this.submitted = true;
-    //
-    //   this.$v.$touch();
-    //   if (this.$v.$invalid) {
-    //     return
-    //   }
-    //   console.log(this.user.firstName)
-    // },
     addData () {
       const data = {
         firstName: this.user.firstName,
