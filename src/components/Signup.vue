@@ -23,20 +23,25 @@
           v-model="user.emailAddress"
           @blur="$v.user.emailAddress.$touch()"
         />
-
-<!--        error - {{ $v.user.emailAddress.$error }}-->
-<!--        <p>required - {{ $v.user.emailAddress.required }}</p>-->
-<!--        <p>email &#45;&#45;{{ $v.user.emailAddress.email }}</p>-->
-
       </div>
-      <div v-if="$v.user.emailAddress.$error" class="errorEmail">
+      <div v-if="$v.user.emailAddress.$error" class="error">
         <span v-if="!$v.user.emailAddress.required || $v.$touch()">Email is required</span>
         <span v-else>Email is invalid</span>
       </div>
 
       <div class="form-group">
         <label>Phone Number</label>
-        <input type="tel" class="form-control form-control-lg" v-model="user.phoneNumber"/>
+        <input type="tel" class="form-control form-control-lg"
+               :class="{ 'is-invalid': submitted && $v.user.phoneNumber.$error }"
+               v-model="user.phoneNumber"
+               @blur="$v.user.phoneNumber.$touch()"
+        />
+      </div>
+      <div v-if="$v.user.phoneNumber.$error" class="error">
+        <span v-if="!$v.user.phoneNumber.required || $v.$touch()"> phone is required</span>
+        <span v-if="!$v.user.phoneNumber.numeric"> Its not a number</span>
+        <span v-if="!$v.user.phoneNumber.maxLength || !$v.user.phoneNumber.minLength"> Number must have 10 numbers  </span>
+        <span v-else>phone is invalid</span>
       </div>
 
       <div class="form-group">
@@ -44,7 +49,16 @@
         <input type="password" class="form-control form-control-lg" v-model="user.password"/>
       </div>
 
-      <button type="button" :disabled="$v.invalid" class="btn btn-dark btn-lg btn-block" @click="addData()">Sign Up</button>
+      <div class="form-group">
+        <label>Confirm Password</label>
+        <input type="password" class="form-control form-control-lg" v-model="user.confirmPassword"/>
+      </div>
+
+      <button type="button" :disabled="$v.$invalid"
+              class="btn btn-dark btn-lg btn-block"
+              @click="addData()">
+        Sign Up
+      </button>
 
       <p class="forgot-password text-right">
         Already registered
@@ -56,7 +70,7 @@
 
 <script>
 import axios from 'axios'
-import { required, email } from 'vuelidate/lib/validators'
+import { required, email, numeric, maxLength, minLength, sameAs } from 'vuelidate/lib/validators'
 
 export default {
   name: 'Signup',
@@ -67,14 +81,18 @@ export default {
         lastName: '',
         emailAddress: '',
         phoneNumber: '',
-        password: ''
+        password: '',
+        confirmPassword: ''
       },
       submitted: false
     }
   },
   validations: {
     user: {
-      emailAddress: { required, email }
+      emailAddress: { required, email },
+      phoneNumber: { required, numeric, maxLength: maxLength(10), minLength: minLength(10) },
+      password: { required, minLength: minLength(6) },
+      confirmPassword: { required, sameAsPassword: sameAs('password') }
     }
 
   },
