@@ -33,7 +33,7 @@
         />
       </div>
       <div v-if="$v.user.emailAddress.$error" class="error">
-        <span v-if="!$v.user.emailAddress.required || $v.$touch()">Email is required</span>
+        <span v-if="!$v.user.emailAddress.required && $v.$touch()">Email is required</span>
         <span v-else>Email is invalid</span>
       </div>
 

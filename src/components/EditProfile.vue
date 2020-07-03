@@ -20,7 +20,7 @@
 
       <div class="form-group">
         <label>Phone Number</label>
-        <input type="email" v-model="user.phone" class="form-control form-control-lg"/>
+        <input type="tel" v-model="user.phoneNumber" class="form-control form-control-lg"/>
       </div>
 
       <div class="form-group">
@@ -28,31 +28,58 @@
         <input type="password" v-model="user.password" class="form-control form-control-lg"/>
       </div>
 
-      <button type="button" class="btn btn-dark btn-lg btn-block" v-on:click="save">Edit</button>
+<p>{{$editData}}</p>
+
+      <button
+        type="button"
+        class="btn btn-dark btn-lg btn-block"
+        v-on:click=" editUser ">
+        Edit
+      </button>
 
     </form>
   </div>
 </template>
 
 <script>
+
+import axios from 'axios'
+
 export default {
   name: 'EditProfile',
-  data: function () {
+  data () {
     return {
       user: {
         firstName: '',
         lastName: '',
         emailAddress: '',
-        phone: '',
+        phoneNumber: '',
         password: ''
       }
     }
   },
   methods: {
+    editUser () {
+      const editData = {
+        firstName: this.user.firstName,
+        lastName: this.user.lastName,
+        emailAddress: this.user.emailAddress,
+        phoneNumber: this.user.phoneNumber,
+        password: this.user.password
+      }
+      const id = this.user.id
+      console.log(id)
+      axios.put('user/' + id, editData)
+        .then(response => {
+          this.$store.state.user = response.editData
+        })
+    },
     save: function () {
       console.log(this.user)
     }
+
   },
+
   mounted () {
     this.user = this.$store.state.user
   }
